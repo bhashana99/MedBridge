@@ -1,0 +1,13 @@
+### Create a new Patient
+POST http://localhost:7000/patients
+Content-Type: application/json
+
+{
+  "name": "patien1 name",
+  "address": "patient1 adddress",
+  "email": "patient@gmail.com",
+  "dateOfBirth": "2001-10-04",
+  "registeredDate": "2024-04-05"
+}
+
+###
