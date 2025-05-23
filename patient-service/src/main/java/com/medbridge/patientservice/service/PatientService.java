@@ -1,5 +1,6 @@
 package com.medbridge.patientservice.service;
 
+import com.medbridge.patientservice.dto.PatientRequestDTO;
 import com.medbridge.patientservice.dto.PatientResponseDTO;
 import com.medbridge.patientservice.mapper.PatientMapper;
 import com.medbridge.patientservice.model.Patient;
@@ -24,5 +25,11 @@ public class PatientService {
                 PatientMapper::toPatientResponseDTO).toList();
 
         return  patientResponseDTOS;
+    }
+
+    public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO) {
+        Patient newPatient = patientRepository.save(PatientMapper.toPatientModel(patientRequestDTO));
+
+        return PatientMapper.toPatientResponseDTO(newPatient);
     }
 }
