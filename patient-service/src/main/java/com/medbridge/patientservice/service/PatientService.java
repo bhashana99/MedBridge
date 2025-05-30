@@ -4,10 +4,13 @@ import com.medbridge.patientservice.dto.PatientRequestDTO;
 import com.medbridge.patientservice.dto.PatientResponseDTO;
 import com.medbridge.patientservice.exception.EmailAlreadyExistsException;
 import com.medbridge.patientservice.exception.PatientNotFoundException;
+import com.medbridge.patientservice.grpc.BillingServiceGrpcClient;
 import com.medbridge.patientservice.mapper.PatientMapper;
 import com.medbridge.patientservice.model.Patient;
 import com.medbridge.patientservice.repository.PatientRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,10 +19,11 @@ import java.util.UUID;
 @Service
 public class PatientService {
     private final PatientRepository patientRepository;
+    private final BillingServiceGrpcClient billingServiceGrpcClient;
 
-
-    public PatientService(PatientRepository patientRepository) {
+    public PatientService(PatientRepository patientRepository, BillingServiceGrpcClient billingServiceGrpcClient) {
         this.patientRepository = patientRepository;
+        this.billingServiceGrpcClient = billingServiceGrpcClient;
     }
 
     public List<PatientResponseDTO> getPatients() {
@@ -36,6 +40,21 @@ public class PatientService {
         }
 
         Patient newPatient = patientRepository.save(PatientMapper.toPatientModel(patientRequestDTO));
+
+        try {
+            billingServiceGrpcClient.createBillingAccount(
+                    newPatient.getId().toString(),
+                    newPatient.getName(),
+                    newPatient.getEmail()
+            );
+        } catch (Exception e) {
+            e.printStackTrace(); // Or use proper logging
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Failed to create billing account via gRPC",
+                    e
+            );
+        }
 
         return PatientMapper.toPatientResponseDTO(newPatient);
     }

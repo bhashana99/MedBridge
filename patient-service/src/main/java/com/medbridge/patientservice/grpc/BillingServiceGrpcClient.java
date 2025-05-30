@@ -26,6 +26,9 @@ public class BillingServiceGrpcClient {
                 serverPort).usePlaintext().build();
 
         blockingStub = BillingServiceGrpc.newBlockingStub(channel);
+        log.info("Billing Service Address: {}", serverAddress);
+        log.info("Billing Service GRPC Port: {}", serverPort);
+
 
     }
 
