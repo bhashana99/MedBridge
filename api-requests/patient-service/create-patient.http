@@ -3,8 +3,8 @@ POST http://localhost:7000/patients
 Content-Type: application/json
 
 {
-  "name": "billing error",
-  "email": "bmksj55545@h.com",
+  "name": "billing done with kafka",
+  "email": "bmk@h.com",
   "address": "address",
   "dateOfBirth": "2001-10-04",
   "registeredDate": "2024-04-05"
