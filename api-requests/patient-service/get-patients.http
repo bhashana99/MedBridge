@@ -1,4 +1,5 @@
 ### GET request to get all patients
-GET http://localhost:7000/patients
+#GET http://localhost:7000/patients
 
+GET http://localhost:7004/api/patients
 ###
