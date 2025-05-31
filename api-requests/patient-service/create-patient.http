@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "name": "billing done with kafka",
-  "email": "bmk@h.com",
+  "email": "bmkll@h.com",
   "address": "address",
   "dateOfBirth": "2001-10-04",
   "registeredDate": "2024-04-05"
