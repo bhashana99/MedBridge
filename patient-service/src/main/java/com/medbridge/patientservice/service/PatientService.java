@@ -5,6 +5,7 @@ import com.medbridge.patientservice.dto.PatientResponseDTO;
 import com.medbridge.patientservice.exception.EmailAlreadyExistsException;
 import com.medbridge.patientservice.exception.PatientNotFoundException;
 import com.medbridge.patientservice.grpc.BillingServiceGrpcClient;
+import com.medbridge.patientservice.kafka.KafkaProducer;
 import com.medbridge.patientservice.mapper.PatientMapper;
 import com.medbridge.patientservice.model.Patient;
 import com.medbridge.patientservice.repository.PatientRepository;
@@ -20,10 +21,12 @@ import java.util.UUID;
 public class PatientService {
     private final PatientRepository patientRepository;
     private final BillingServiceGrpcClient billingServiceGrpcClient;
+    private final KafkaProducer kafkaProducer;
 
-    public PatientService(PatientRepository patientRepository, BillingServiceGrpcClient billingServiceGrpcClient) {
+    public PatientService(PatientRepository patientRepository, BillingServiceGrpcClient billingServiceGrpcClient, KafkaProducer kafkaProducer) {
         this.patientRepository = patientRepository;
         this.billingServiceGrpcClient = billingServiceGrpcClient;
+        this.kafkaProducer = kafkaProducer;
     }
 
     public List<PatientResponseDTO> getPatients() {
@@ -41,20 +44,14 @@ public class PatientService {
 
         Patient newPatient = patientRepository.save(PatientMapper.toPatientModel(patientRequestDTO));
 
-        try {
+
             billingServiceGrpcClient.createBillingAccount(
                     newPatient.getId().toString(),
                     newPatient.getName(),
                     newPatient.getEmail()
             );
-        } catch (Exception e) {
-            e.printStackTrace(); // Or use proper logging
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Failed to create billing account via gRPC",
-                    e
-            );
-        }
+
+            kafkaProducer.sendEvent(newPatient);
 
         return PatientMapper.toPatientResponseDTO(newPatient);
     }
