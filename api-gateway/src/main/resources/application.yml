@@ -10,6 +10,6 @@ spring:
         - id: patient-service-route
           uri: http://patient-service:7000
           predicates:
-            - path = /api/patients/**
+            - Path = /api/patients/**
           filters:
-            - strip-prefix=1
+            - StripPrefix=1
