@@ -1,0 +1,15 @@
+server:
+  port: 7004
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        ## REST CLIENT -> http://localhost:7004/api/patients
+        ## API GATEWAY -> http://patient-service:7000/patients
+        - id: patient-service-route
+          uri: http://patient-service:7000
+          predicates:
+            - path = /api/patients/**
+          filters:
+            - strip-prefix=1
