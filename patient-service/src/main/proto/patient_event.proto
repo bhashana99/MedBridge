@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package patient.events; // generate Java classes under patient.events
+option java_multiple_files = true;  //to generate separate Java files for each message,
+
+message PatientEvent{
+  string patientId = 1;
+  string name = 2;
+  string email = 3;
+  string event_type = 4;
+}
+
