@@ -1,5 +1,5 @@
 ### Create a new Patient
-POST http://localhost:7005/login
+POST http://localhost:7004/auth/login
 Content-Type: application/json
 
 {

@@ -15,3 +15,14 @@ spring:
                         - Path=/api/patients/**
                       filters:
                         - StripPrefix=1
+
+                ## REST CLIENT -> http://localhost:7005/auth/login
+                ## API GATEWAY -> http://auth-service:7000/login
+                    - id: auth-service-route
+                      uri:
+                        http://auth-service:7005
+                      predicates:
+                        - Path=/auth/**
+                      filters:
+                        - StripPrefix=1
+
