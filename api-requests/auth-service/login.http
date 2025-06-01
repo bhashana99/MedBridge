@@ -1,0 +1,8 @@
+### Create a new Patient
+POST http://localhost:7005/login
+Content-Type: application/json
+
+{
+  "email": "testuser@test.com",
+  "password": "password123"
+}
