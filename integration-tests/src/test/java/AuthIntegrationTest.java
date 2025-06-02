@@ -15,10 +15,6 @@ public class AuthIntegrationTest {
 
     @Test
     public void shouldReturnOkWithValidToken(){
-        //1. Arrange
-        //2. act
-        //3. assert
-
         String loginPayload = """
                 {
                 "email" : "testuser@test.com",
