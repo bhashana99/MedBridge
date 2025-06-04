@@ -642,6 +642,26 @@
      "Type": "TCP"
     }
    }
+  },
+  "MskCluster": {
+   "Type": "AWS::MSK::Cluster",
+   "Properties": {
+    "BrokerNodeGroupInfo": {
+     "BrokerAZDistribution": "DEFAULT",
+     "ClientSubnets": [
+      {
+       "Ref": "MedBridgeVPCPrivateSubnet1Subnet25A252EB"
+      },
+      {
+       "Ref": "MedBridgeVPCPrivateSubnet2SubnetB17A6F1F"
+      }
+     ],
+     "InstanceType": "kafka.m5.xlarge"
+    },
+    "ClusterName": "kafa-cluster",
+    "KafkaVersion": "2.8.0",
+    "NumberOfBrokerNodes": 1
+   }
   }
  }
 }
