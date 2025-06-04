@@ -4,6 +4,8 @@ package com.medbridge.stack;
 import software.amazon.awscdk.*;
 import software.amazon.awscdk.services.ec2.*;
 import software.amazon.awscdk.services.ec2.InstanceType;
+import software.amazon.awscdk.services.ecs.CloudMapNamespaceOptions;
+import software.amazon.awscdk.services.ecs.Cluster;
 import software.amazon.awscdk.services.msk.CfnCluster;
 import software.amazon.awscdk.services.rds.*;
 import software.amazon.awscdk.services.route53.CfnHealthCheck;
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class LocalStack extends Stack {
     private final Vpc vpc;
+    private final Cluster ecsCluster;
 
 
     public LocalStack(final App scope, final String id, final StackProps props) {
@@ -32,6 +35,8 @@ public class LocalStack extends Stack {
                 createDbHealthCheck(patientServiceDb,"PatientServiceDBHealthCheck");
 
         CfnCluster mskCluster = createMskCluster();
+
+        this.ecsCluster = createEcsCluster();
     }
 
     private Vpc createVpc() {
@@ -83,6 +88,17 @@ public class LocalStack extends Stack {
                         .build())
                 .build();
     }
+
+    private Cluster createEcsCluster(){
+        return Cluster.Builder.create(this, "PatientManagementCluster")
+                .vpc(vpc)
+                .defaultCloudMapNamespace(CloudMapNamespaceOptions.builder()
+                        .name("patient-management.local")
+                        .build())
+                .build();
+    }
+
+
 
 
     public static void main(final String[] args) {
