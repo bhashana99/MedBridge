@@ -1,1 +1,395 @@
-{}
+{
+ "Resources": {
+  "MedBridgeVPC436A1092": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MedBridgeVPC"
+     }
+    ]
+   }
+  },
+  "MedBridgeVPCPublicSubnet1Subnet11994B33": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MedBridgeVPC436A1092"
+    }
+   }
+  },
+  "MedBridgeVPCPublicSubnet1RouteTable3BE5B950": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MedBridgeVPC436A1092"
+    }
+   }
+  },
+  "MedBridgeVPCPublicSubnet1RouteTableAssociationB6D38E43": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "MedBridgeVPCPublicSubnet1RouteTable3BE5B950"
+    },
+    "SubnetId": {
+     "Ref": "MedBridgeVPCPublicSubnet1Subnet11994B33"
+    }
+   }
+  },
+  "MedBridgeVPCPublicSubnet1DefaultRoute502CE80B": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "MedBridgeVPCIGW4F2126CB"
+    },
+    "RouteTableId": {
+     "Ref": "MedBridgeVPCPublicSubnet1RouteTable3BE5B950"
+    }
+   },
+   "DependsOn": [
+    "MedBridgeVPCVPCGW2DC23824"
+   ]
+  },
+  "MedBridgeVPCPublicSubnet1EIP3EF26A68": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "MedBridgeVPCPublicSubnet1NATGatewayAA69C321": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "MedBridgeVPCPublicSubnet1EIP3EF26A68",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "MedBridgeVPCPublicSubnet1Subnet11994B33"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "MedBridgeVPCPublicSubnet1DefaultRoute502CE80B",
+    "MedBridgeVPCPublicSubnet1RouteTableAssociationB6D38E43"
+   ]
+  },
+  "MedBridgeVPCPublicSubnet2SubnetAAB58A14": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MedBridgeVPC436A1092"
+    }
+   }
+  },
+  "MedBridgeVPCPublicSubnet2RouteTableFF16E2C0": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MedBridgeVPC436A1092"
+    }
+   }
+  },
+  "MedBridgeVPCPublicSubnet2RouteTableAssociationE0E8F1BD": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "MedBridgeVPCPublicSubnet2RouteTableFF16E2C0"
+    },
+    "SubnetId": {
+     "Ref": "MedBridgeVPCPublicSubnet2SubnetAAB58A14"
+    }
+   }
+  },
+  "MedBridgeVPCPublicSubnet2DefaultRouteA5DB045A": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "MedBridgeVPCIGW4F2126CB"
+    },
+    "RouteTableId": {
+     "Ref": "MedBridgeVPCPublicSubnet2RouteTableFF16E2C0"
+    }
+   },
+   "DependsOn": [
+    "MedBridgeVPCVPCGW2DC23824"
+   ]
+  },
+  "MedBridgeVPCPublicSubnet2EIP8414A116": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PublicSubnet2"
+     }
+    ]
+   }
+  },
+  "MedBridgeVPCPublicSubnet2NATGateway04200F72": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "MedBridgeVPCPublicSubnet2EIP8414A116",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "MedBridgeVPCPublicSubnet2SubnetAAB58A14"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "MedBridgeVPCPublicSubnet2DefaultRouteA5DB045A",
+    "MedBridgeVPCPublicSubnet2RouteTableAssociationE0E8F1BD"
+   ]
+  },
+  "MedBridgeVPCPrivateSubnet1Subnet25A252EB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MedBridgeVPC436A1092"
+    }
+   }
+  },
+  "MedBridgeVPCPrivateSubnet1RouteTable16BAC921": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MedBridgeVPC436A1092"
+    }
+   }
+  },
+  "MedBridgeVPCPrivateSubnet1RouteTableAssociation4F52F01C": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "MedBridgeVPCPrivateSubnet1RouteTable16BAC921"
+    },
+    "SubnetId": {
+     "Ref": "MedBridgeVPCPrivateSubnet1Subnet25A252EB"
+    }
+   }
+  },
+  "MedBridgeVPCPrivateSubnet1DefaultRouteC228AEE6": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "MedBridgeVPCPublicSubnet1NATGatewayAA69C321"
+    },
+    "RouteTableId": {
+     "Ref": "MedBridgeVPCPrivateSubnet1RouteTable16BAC921"
+    }
+   }
+  },
+  "MedBridgeVPCPrivateSubnet2SubnetB17A6F1F": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MedBridgeVPC436A1092"
+    }
+   }
+  },
+  "MedBridgeVPCPrivateSubnet2RouteTable91C7BB2B": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "localstack/MedBridgeVPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MedBridgeVPC436A1092"
+    }
+   }
+  },
+  "MedBridgeVPCPrivateSubnet2RouteTableAssociation9E300E2B": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "MedBridgeVPCPrivateSubnet2RouteTable91C7BB2B"
+    },
+    "SubnetId": {
+     "Ref": "MedBridgeVPCPrivateSubnet2SubnetB17A6F1F"
+    }
+   }
+  },
+  "MedBridgeVPCPrivateSubnet2DefaultRoute91E64725": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "MedBridgeVPCPublicSubnet2NATGateway04200F72"
+    },
+    "RouteTableId": {
+     "Ref": "MedBridgeVPCPrivateSubnet2RouteTable91C7BB2B"
+    }
+   }
+  },
+  "MedBridgeVPCIGW4F2126CB": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MedBridgeVPC"
+     }
+    ]
+   }
+  },
+  "MedBridgeVPCVPCGW2DC23824": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "MedBridgeVPCIGW4F2126CB"
+    },
+    "VpcId": {
+     "Ref": "MedBridgeVPC436A1092"
+    }
+   }
+  }
+ }
+}

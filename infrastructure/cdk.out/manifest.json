@@ -11,6 +11,146 @@
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}"
       },
+      "metadata": {
+        "/localstack/MedBridgeVPC/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPC436A1092"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet1Subnet11994B33"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet1RouteTable3BE5B950"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet1RouteTableAssociationB6D38E43"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet1DefaultRoute502CE80B"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet1EIP3EF26A68"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet1NATGatewayAA69C321"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet2SubnetAAB58A14"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet2RouteTableFF16E2C0"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet2RouteTableAssociationE0E8F1BD"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet2DefaultRouteA5DB045A"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet2EIP8414A116"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPublicSubnet2NATGateway04200F72"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPrivateSubnet1Subnet25A252EB"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPrivateSubnet1RouteTable16BAC921"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPrivateSubnet1RouteTableAssociation4F52F01C"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPrivateSubnet1DefaultRouteC228AEE6"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPrivateSubnet2SubnetB17A6F1F"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPrivateSubnet2RouteTable91C7BB2B"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPrivateSubnet2RouteTableAssociation9E300E2B"
+          }
+        ],
+        "/localstack/MedBridgeVPC/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCPrivateSubnet2DefaultRoute91E64725"
+          }
+        ],
+        "/localstack/MedBridgeVPC/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCIGW4F2126CB"
+          }
+        ],
+        "/localstack/MedBridgeVPC/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MedBridgeVPCVPCGW2DC23824"
+          }
+        ]
+      },
       "displayName": "localstack"
     },
     "Tree": {
